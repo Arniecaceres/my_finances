@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Finanzas App</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="light">
+
+<header>
+  <h1>Finanzas</h1>
+  <span id="balance">S/ 0.00</span>
+</header>
+
+<div class="theme-switch">
+  <div class="theme light" onclick="setTheme('light')"></div>
+  <div class="theme dark" onclick="setTheme('dark')"></div>
+  <div class="theme black" onclick="setTheme('black')"></div>
+</div>
+
+<section class="cards">
+  <div class="card ingreso">
+    <span>Ingresos</span>
+    <strong id="ingresos">S/ 0.00</strong>
+  </div>
+  <div class="card egreso">
+    <span>Egresos</span>
+    <strong id="egresos">S/ 0.00</strong>
+  </div>
+  <div class="card ahorro">
+    <span>Ahorros</span>
+    <strong id="ahorro">S/ 0.00</strong>
+  </div>
+</section>
+
+<section class="chart-controls">
+  <select id="chartType" onchange="renderGrafico()">
+    <option value="line">Líneas</option>
+    <option value="bar">Barras</option>
+    <option value="combo">Combinado</option>
+  </select>
+</section>
+
+<section class="graficos">
+  <div class="grafico-card">
+    <canvas id="graficoPrincipal"></canvas>
+  </div>
+</section>
+
+<section class="form-section">
+<form id="form">
+  <input id="descripcion" placeholder="Descripción" required>
+  <input type="number" id="monto" placeholder="Monto (S/)" required>
+
+  <select id="tipo" onchange="actualizarCategorias()">
+    <option value="ingreso">Ingreso</option>
+    <option value="egreso">Egreso</option>
+    <option value="ahorro">Ahorro</option>
+  </select>
+
+  <select id="categoria"></select>
+  <input type="date" id="fecha" required>
+
+  <button type="submit">Guardar</button>
+</form>
+</section>
+
+<section class="lista">
+  <ul id="lista"></ul>
+</section>
+
+<button class="btn-secundario" onclick="abrirMeta()">Ver Meta de Ahorro</button>
+<button class="btn-analisis" onclick="mostrarAnalisis()">Ver Análisis Financiero</button>
+
+<!-- MODAL META -->
+<div class="modal" id="modalMeta">
+  <h2>Meta de Ahorro</h2>
+  <input id="metaMonto" type="number" placeholder="Meta en S/">
+  <button onclick="calcularMeta()">Calcular</button>
+
+  <div class="progreso">
+    <div id="barra"></div>
+  </div>
+
+  <p id="resultadoMeta"></p>
+  <canvas id="graficoMeta"></canvas>
+
+  <button onclick="cerrarMeta()">Cerrar</button>
+</div>
+
+<!-- MODAL ANALISIS -->
+<div class="modal" id="modalAnalisis">
+  <h2>Análisis Financiero</h2>
+  <canvas id="graficoAnalisis"></canvas>
+  <button onclick="cerrarAnalisis()">Cerrar</button>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
