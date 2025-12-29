@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>VIVE | Finanzas Personales</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- FAVICON -->
+  <link rel="icon" type="image/png" sizes="32x32" href="vivelog.png">
+  <link rel="apple-touch-icon" href="vivelog.png">
+
+  <!-- CHART JS -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="header">
+  <div class="brand-container">
+    <img src="vivelog.png" class="brand-logo">
+    <h1 class="brand">VIVE</h1>
+  </div>
+  <p>Finanzas claras, decisiones inteligentes</p>
+  <button id="themeToggle" class="theme-toggle">Modo Claro</button>
+</header>
+
+<section class="card register-card">
+  <h2>Registrar movimiento</h2>
+
+  <form id="transactionForm" class="register-form">
+
+    <div class="movement-selector">
+      <label>
+        <input type="radio" name="movementRadio" value="income">
+        <span class="movement income">Ingreso</span>
+      </label>
+      <label>
+        <input type="radio" name="movementRadio" value="expense">
+        <span class="movement expense">Egreso</span>
+      </label>
+      <label>
+        <input type="radio" name="movementRadio" value="saving-in">
+        <span class="movement saving-in">Ingreso Ahorro</span>
+      </label>
+      <label>
+        <input type="radio" name="movementRadio" value="saving-out">
+        <span class="movement saving-out">Egreso Ahorro</span>
+      </label>
+    </div>
+
+    <input type="hidden" id="movement" required>
+
+    <div class="input-group">
+      <input id="category" required>
+      <label>Categoría</label>
+    </div>
+
+    <div class="input-group">
+      <input id="amount" type="number" required>
+      <label>Monto</label>
+    </div>
+
+    <div class="input-group">
+      <input id="date" type="date" required>
+      <label>Fecha</label>
+    </div>
+
+    <button type="submit" class="save-btn">Guardar movimiento</button>
+  </form>
+</section>
+
+<section class="stats">
+  <div class="stat income"><h3>Ingresos</h3><span id="totalIncome">S/ 0</span></div>
+  <div class="stat expense"><h3>Egresos</h3><span id="totalExpense">S/ 0</span></div>
+  <div class="stat saving"><h3>Ahorros</h3><span id="totalSaving">S/ 0</span></div>
+  <div class="stat net"><h3>Flujo Neto</h3><span id="netFlow">S/ 0</span></div>
+</section>
+
+<section class="card">
+  <h2>Seguimiento</h2>
+  <ul id="trackingList"></ul>
+</section>
+
+<section class="card charts-wrapper">
+  <h2>Gráficos</h2>
+  <div class="charts-scroll">
+    <div class="charts">
+      <canvas id="flowChart"></canvas>
+      <canvas id="savingChart"></canvas>
+      <canvas id="netChart"></canvas>
+    </div>
+  </div>
+</section>
+<section class="card savings-goals">
+  <h2>Metas de Ahorro</h2>
+
+  <!-- AGREGAR META -->
+  <div class="goal-add">
+    <div class="input-group">
+      <input id="goalName" placeholder=" ">
+      <label>Nombre de la meta</label>
+    </div>
+
+    <div class="input-group">
+      <input id="goalTarget" type="number" placeholder=" ">
+      <label>Monto objetivo (S/)</label>
+    </div>
+
+    <button id="addGoal" class="save-btn">Agregar meta</button>
+  </div>
+
+  <!-- LISTA DE METAS -->
+  <div id="goalsList" class="goals-list"></div>
+</section>
+
+<script src="app.js"></script>
+</body>
+</html>
